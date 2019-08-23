@@ -21,7 +21,18 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
+
     <p class="login-box-msg">Sign in</p>
+    <?php if ($this->session->flashdata('gagal')) { ?>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+        <h4>
+          <i class="icon fa fa-warning"></i> <?php $this->session->flashdata('gagal'); ?>
+        </h4>
+        Login gagal, username atau password salah!
+      </div>
+      
+    <?php } ?>
 
     <form action="<?=base_url('admin/login')?>" method="post">
       <div class="form-group has-feedback">
