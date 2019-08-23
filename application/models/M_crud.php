@@ -9,8 +9,22 @@ class M_crud extends CI_Model {
 		//Do your magic here
 	}
 
+	public function select($tabel){
+		return $this->db->get($tabel);
+	}
 	
+	public function insert($tabel,$data){
+		$this->db->insert($tabel, $data);
+	}
 
+	public function update($tabel,$data,$where){
+		$this->db->where($where);
+		$this->db->update($tabel, $data);
+	}
+	public function delete($tabel,$where){
+		$this->db->where($where);
+		$this->db->delete($tabel);
+	}
 }
 
 /* End of file M_crud.php */
