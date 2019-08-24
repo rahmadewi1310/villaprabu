@@ -33,7 +33,7 @@
           </div>
         </div>
         <!-- /.box-header -->
-        <form action="<?php base_url('admin/masterdata/insertkamar') ?>" method="post">
+        <form action="http://localhost/villaprabu/Admin/MasterData/insertkamar/" method="post">
           <div class="box-body">
             <div class="row">
               <div class="col-md-6">
