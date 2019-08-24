@@ -15,7 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Kamar
+        Data Admin
       </h1>
     </section>
 
@@ -25,36 +25,47 @@
       <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h3 class="box-title">Tambah data kamar</h3>
+          <h3 class="box-title">Tambah data adnin</h3>
+          <?php if ($this->session->flashdata('passwordsama')) {?>
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+              <h4>
+                <i class="icon fa fa-warning"></i> <?php echo $this->session->flashdata('passwordsama'); ?>
+              </h4>
+            </div>
+          <?php } ?>
         </div>
         <!-- /.box-header -->
-        <form action="http://localhost/villaprabu/Admin/MasterData/insertkamar/" method="post">
+        <form action="http://localhost/villaprabu/Admin/MasterData/insertadmin/" method="post">
           <div class="box-body">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Nomor kamar</label>
-                  <input type="text" name="no_kamar" class="form-control" placeholder="isi nomor kamar!" required>
+                  <label>Nama</label>
+                  <input type="text" name="nama" class="form-control" placeholder="Nama admin baru!" required>
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Harga</label>
-                  <input type="number" name="harga" class="form-control" placeholder="berapa harga kamar!" required>
+                  <label>Username</label>
+                  <input type="text" name="username" class="form-control" placeholder="Username!" required>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" name="email" class="form-control" placeholder="Email!" required>
                 </div>
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Deskripsi</label>
-                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" required></textarea>
+                  <label>Password</label>
+                  <input type="password" name="password1" class="form-control" placeholder="Password" required>
                 </div>
-
+                <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Foto</label>
-                    <div class="form-group">
-                      <input type="file" id="input-file-now" class="dropify" name="img" />
-                    </div>
+                  <label>Ulangi Password</label>
+                  <input type="password" name="password2" class="form-control" placeholder="Ulangi password!" required>
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -77,30 +88,25 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data kamar</h3>
+              <h3 class="box-title">Data Admin</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Nomor Kamar</th>
-                  <th>Harga</th>
-                  <th>Deskripsi</th>
-                  <th>Aksi</th>
+                  <th>Nama</th>
+                  <th>Username</th>
+                  <th>Email</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php
-                    foreach($room as $a){?>
+                    foreach($admin as $a){?>
                 <tr>
-                  <td><?php echo $a->no_kamar?></td>
-                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
-                  <td><?php echo $a->desc?></td>
-                  <td>
-                    <a href="<?php echo base_url('admin/masterdata/editkamar/'.$a->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>
-                    <a href="<?php echo base_url('admin/masterdata/deletekamar/'.$a->id) ?>" class="btn btn-danger btn-xs">Delete</a>
-                  </td>
+                  <td><?php echo $a->nama?></td>
+                  <td><?php echo $a->username?></td>
+                  <td><?php echo $a->email?></td>
                 </tr>
                 <?php } ?>
               </tbody>

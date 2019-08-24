@@ -12,6 +12,11 @@ class M_crud extends CI_Model {
 	public function select($tabel){
 		return $this->db->get($tabel);
 	}
+	public function selectwhere($tabel,$where){
+		$this->db->where($where);
+		return $this->db->get($tabel);
+
+	}
 	
 	public function insert($tabel,$data){
 		$this->db->insert($tabel, $data);
