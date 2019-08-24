@@ -7,10 +7,10 @@
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET AUTOCOMMIT = 0;
+-- START TRANSACTION;
+-- SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 --
 -- Struktur dari tabel `tb_admin`
 --
+
+DROP DATABASE IF EXISTS `booking_villa`;
+CREATE DATABASE `booking_villa`;
+USE `booking_villa`;
 
 CREATE TABLE `tb_admin` (
   `id` int(10) UNSIGNED NOT NULL,
