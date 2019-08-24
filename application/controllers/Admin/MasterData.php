@@ -30,5 +30,13 @@ class masterdata extends CI_Controller{
 		$data = array('room' => $this->M_crud->select('tb_room')->result());
 		$this->load->view('Admin/kamar',$data);
 	}
+	function insertkamar(){
+		$input = $this->input;
+		$data = array(	'no_kamar'	=> $input->post('no_kamar'),
+						'harga' 	=> $input->post('harga'),
+						'dec' 		=> $input->post('desc'));
+		$this->M_crud->insert("tb_room", $data);
+		// redirect(base_url('admin/masterdata/kamar'),'refresh');
+	}
 
 }

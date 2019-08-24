@@ -33,7 +33,7 @@
           </div>
         </div>
         <!-- /.box-header -->
-        <form>
+        <form action="<?php base_url('admin/masterdata/insertkamar') ?>" method="post">
           <div class="box-body">
             <div class="row">
               <div class="col-md-6">
@@ -52,7 +52,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Deskripsi</label>
-                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" textarea></textarea>
+                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" ></textarea>
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -62,7 +62,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-success">Simpan</button>
+            <input type="submit" name="submit" value="Simpan" class="btn btn-success">
           </div>
         </form>
       </div>

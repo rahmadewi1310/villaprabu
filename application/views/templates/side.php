@@ -26,47 +26,26 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
       <li>
-        <a href="http://localhost/villaprabu/">
+        <a href="<?=base_url('admin/dashboard')?>">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-key"></i>
-          <span>check In/ Check Out</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="<?php echo base_url('checkin/') ?>"><i class="fa fa-circle-o"></i>Check In </a></li>
-          <li><a href="<?php echo site_url('checkin/tampil_list') ?>"><i class="fa fa-circle-o"></i>List Check in </a></li>
-          <li><a href="<?php echo base_url('checkin/tampil_list') ?>"><i class="fa fa-circle-o"></i>Check Out</a></li>
-          <li><a href="<?php echo base_url('booking') ?>"><i class="fa fa-circle-o"></i>Reservasi / Booking</a></li>
-          <li><a href="<?php echo base_url('booking/tampil_list') ?>"><i class="fa fa-circle-o"></i>List Booking</a></li>
-        </ul>
-      </li>
-
-      <li class="header">ADMINISTRASI HOTEL</li>
-
       <li>
-        <a href="http://localhost/villaprabu/Admin/MasterData/kamar/">
-          <i class="fa fa-bed"></i> <span>Kamar</span>
+        <a href="<?=base_url('admin/book')?>">
+          <i class="fa fa-tag"></i> <span>Booking</span>
         </a>
       </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-exchange"></i>
-                <span>Laporan</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('transaksikamar') ?>"><i class="fa fa-circle-o"></i> Transaksi Kamar</a></li>
-               </ul>
-            </li>
-        </ul>
-      </li>
+      
+      <li class="header">MASTER DATA</li>
+      <li><a href="<?php echo base_url('masterdata/admin') ?>"><i class="fa fa-users"></i>Data Admin </a></li>
+      <li><a href="<?php echo site_url('masterdata/kamar') ?>"><i class="fa fa-home"></i>Data Kamar</a></li>
+      <li class="header">LAPORAN</li>
+      <li><a href="<?php echo base_url('laporan/booking') ?>"><i class="fa fa-tags"></i>Laporan Booking</a></li>
+      <li><a href="<?php echo site_url('laporan/pelanggan') ?>"><i class="fa fa-user"></i>Laporan Pelanggan</a></li>
+      <li><a href="<?php echo site_url('laporan/kamar') ?>"><i class="fa fa-home"></i>Laporan Kamar</a></li>
+      
     </ul>
-  </section>
-  <!-- /.sidebar -->
+  </li>
+</ul>
+</section>
 </aside>
