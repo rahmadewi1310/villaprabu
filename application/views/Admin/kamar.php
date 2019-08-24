@@ -89,12 +89,15 @@
                 </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    foreach($room as $a){?>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><?php echo $a->no_kamar?></td>
+                  <td><?php echo $a->harga?></td>
+                  <td><?php echo $a->desc?></td>
                   <td></td>
                 </tr>
+                <?php } ?>
               </tbody>
             </table>
           </div>

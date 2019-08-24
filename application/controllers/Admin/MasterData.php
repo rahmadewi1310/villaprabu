@@ -24,8 +24,8 @@ class masterdata extends CI_Controller{
 	}
 
 	function kamar(){
-		$this->M_crud->select('');
-		$this->load->view('Admin/kamar');
+		$data = array('room' => $this->M_crud->select('tb_room')->result());
+		$this->load->view('Admin/kamar',$data);
 	}
 
 }

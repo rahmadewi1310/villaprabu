@@ -27,7 +27,7 @@
       <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
         <h4>
-          <i class="icon fa fa-warning"></i> <?php $this->session->flashdata('gagal'); ?>
+          <i class="icon fa fa-warning"></i> <?php echo $this->session->flashdata('gagal'); ?>
         </h4>
         Login gagal, username atau password salah!
       </div>
@@ -36,11 +36,11 @@
 
     <form action="<?=base_url('admin/login')?>" method="post">
       <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" placeholder="Username">
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

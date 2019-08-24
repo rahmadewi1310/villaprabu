@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Agu 2019 pada 15.02
+-- Generation Time: 24 Agu 2019 pada 15.26
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `booking_villa`
 --
+DROP DATABASE IF EXISTS `booking_villa`;
+CREATE DATABASE IF NOT EXISTS `booking_villa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `booking_villa`;
 
 -- --------------------------------------------------------
 
