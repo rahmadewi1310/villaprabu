@@ -5,7 +5,8 @@ class masterdata extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('admin');
+		$this->load->model('M_admin');
+		$this->load->model('M_crud');
 		
 	}
 
@@ -20,6 +21,11 @@ class masterdata extends CI_Controller{
 
 	function admin_post(){
 
+	}
+
+	function kamar(){
+		$this->M_crud->select('');
+		$this->load->view('Admin/kamar');
 	}
 
 }
