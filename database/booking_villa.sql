@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Agu 2019 pada 15.02
+-- Generation Time: 24 Agu 2019 pada 15.26
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -21,16 +21,12 @@
 --
 -- Database: `booking_villa`
 --
+DROP DATABASE IF EXISTS `booking_villa`;
+CREATE DATABASE IF NOT EXISTS `booking_villa` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `booking_villa`;
 
 -- --------------------------------------------------------
 
---
--- Struktur dari tabel `tb_admin`
---
-
-DROP DATABASE IF EXISTS `booking_villa`;
-CREATE DATABASE `booking_villa`;
-USE `booking_villa`;
 
 CREATE TABLE `tb_admin` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -225,7 +221,3 @@ ALTER TABLE `tb_pembayaran`
 ALTER TABLE `tb_room`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

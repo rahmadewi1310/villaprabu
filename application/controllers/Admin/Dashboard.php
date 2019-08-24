@@ -3,10 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller{
 
-  public function __construct()
+  function __construct()
   {
     parent::__construct();
-    //Codeigniter : Write Less Do More
+	if($this->session->userdata('username') == '' && $this->session->userdata('email') == ''){
+		redirect('admin/login');
+	}
   }
 
   function index()
