@@ -39,6 +39,48 @@ class masterdata extends CI_Controller{
 		$this->load->view('Admin/kamar',$data);
 	}
 	function insertkamar(){
+
+		// gambar bukti
+        $img = $_FILES['img']['name'];
+        $config['upload_path']='./uploads';
+        $config['allowed_types']='jpg|png|jpeg';
+        $config['file_name'] = $this->input->post('no_kamar');
+        $config['overwrite'] = TRUE;
+        $config['file_ext_tolower'] = TRUE;
+        $config['remove_space'] = TRUE;
+        $this->load->library('upload',$config);
+        if($this->upload->do_upload('img')){
+
+	        $images = $this->upload->data();
+	        $config['img_library'] = 'gd2';
+	        $config['source_image'] = './uploads'.$images['file_name'];
+	        $config['create_thumb'] = FALSE;
+	        $config['maintain_ratio'] = FALSE;
+	        $config['quality'] = '100%';
+	        $config['width'] = 512;
+	        $config['height'] = 512;
+	        $config['new_image'] = './img/bukti'.$images['file_name'];
+	        $this->load->library('image_lib',$config);
+	        $this->image_lib->resize();
+	        $this->image_lib->clear();
+
+	        if (!$this->image_lib->resize()) {
+	            echo $this->image_lib->display_errors();
+	        }
+	        $input = $this->input;
+			$data = array(	'no_kamar'	=> $input->post('no_kamar'),
+							'harga' 	=> $input->post('harga'),
+							'desc' 		=> $input->post('desc'),
+							'img'		=> $images['file_name'])	;
+			$this->M_crud->insert("tb_room", $data);
+			redirect(base_url('admin/masterdata/kamar'),'refresh');
+
+
+        }
+        // gambar bukti
+
+
+
 		$input = $this->input;
 		$data = array(	'no_kamar'	=> $input->post('no_kamar'),
 						'harga' 	=> $input->post('harga'),
