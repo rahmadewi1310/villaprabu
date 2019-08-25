@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller{
 
   function index()
   {
-    $this->load->view('welcome_message.php');
+    $this->load->view('admin/dashboard');
   }
 
 }
