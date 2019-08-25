@@ -2,92 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_kamar extends CI_Model{
-  public $table   = 'TB_KAMAR';
-  public $primary = 'ID_KAMAR';
 
-  public function __construct()
-  {
-    parent::__construct();
-  //Codeigniter : Write Less Do More
+  function cari_kamar($start_date, $end_date, $person){
+    $sql = "SELECT tb_room.* FROM tb_room 
+      WHERE (
+        SELECT count(tb_detail_book.id) FROM tb_detail_book INNER JOIN tb_book ON tb_detail_book.book_id = tb_book.id  
+        WHERE (tb_detail_book.tanggal BETWEEN '$start_date' AND '$end_date') 
+        AND tb_detail_book.room_id = tb_room.id
+        AND tb_book.status = 'TERKONFIRMASI' 
+      ) <= 0 AND '$start_date' < '$end_date';";
+
+    // echo "{\"sql\":\"".$sql."\", \"data\":";
+    return $this->db->query($sql)->result();
   }
-
-  public function list()
-  {
-    return $this ->db->get($this->table)->result();
-  }
-
-  public function edit($ID_KAMAR)
-  {
-    $query = $this->db->where("ID_KAMAR", $ID_KAMAR)
-              ->get("TB_KAMAR");
-
-    if ($query) {
-      return $query->row();
-    }else{
-      return false;
-    }
-  }
-
-  public function update($data, $id)
-  {
-    $query = $this->db->update("TB_KAMAR", $data, $id);
-
-    if($query){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  public function delete($id)
-  {
-    return $this->db->delete($this->table, array("ID_KAMAR" => $id));
-  }
-
-  public function select($select, $where)
-  {
-    return $this->db->select($select)
-                    ->where($where)
-                    ->order_by('ID_KAMAR', 'ASC')
-                    ->get($this->table);
-  }
-
-  public function list_tipe()
-  {
-    $this->db->select('*');
-    $this->db->from('TB_KAMAR');
-    $this->db->join('TB_KAMAR_TIPE', 'TB_KAMAR_TIPE.ID_KAMAR_TIPE=TB_KAMAR.ID_KAMAR_TIPE');
-    $query = $this->db->get();
-    return $query->result();
-  }
-
-  public function list_dashboard() //untuk dashboard pelanggan
-  {
-    $this->db->select('*');
-    $this->db->from('TB_KAMAR');
-    $this->db->join('TB_KAMAR_TIPE', 'TB_KAMAR_TIPE.ID_KAMAR_TIPE=TB_KAMAR.ID_KAMAR_TIPE');
-    $this->db->where('TB_KAMAR.STATUS_KAMAR', 'TERSEDIA');
-    $query = $this->db->get();
-    return $query->result();
-  }
-
-
-  public function getKamar()
-  {
-    $this->db->select('*');
-    $this->db->from('TB_KAMAR_TIPE');
-    $this->db->join('TB_KAMAR', 'TB_KAMAR_TIPE.ID_KAMAR_TIPE=TB_KAMAR_TIPE.ID_KAMAR_TIPE');
-    $query = $this->db->get();
-    return $query->result();
-  }
-
-  public function insert($value)
-  {
-    return $this->db->insert($this->table, $value);
-  }
-
-  public function getAll(){
-    return $this->db->get($this->table)->result_array();
-  }
-
- }
+}

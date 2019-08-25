@@ -3,23 +3,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		if ($this->input->get('booking') != null) {
+			$this->booking();
+		}else{
+			$this->load->model('M_kamar');
+			$checkin = $this->input->get('check_in');
+			$checkout = $this->input->get('check_out');
+			$person = $this->input->get('person');
+			$data['checkin'] = ($checkin == null)?date("Y-m-d"):$checkin;
+			$data['checkout'] = ($checkout == null)?(((new DateTime($data['checkin']))->modify('+1 day'))->format('Y-m-d')):$checkout;
+			$data['night'] = ((new DateTime($checkout))->diff(new DateTime($checkin)))->d;
+			$data['room'] = $this->M_kamar->cari_kamar($checkin, $checkout, $person);
+			// echo "}";
+			$this->load->view('welcome_message', $data);
+		}
+	}
+
+	function booking(){
+		$room_id = $this->input->get('booking');
+		$checkin = $this->input->get('check_in');
+		$checkout = $this->input->get('check_out');
+		$diff = (new DateTime($checkout))->diff(new DateTime($checkin));
 	}
 }

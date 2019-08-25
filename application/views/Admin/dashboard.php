@@ -55,5 +55,7 @@
 		</section>
 	</div>
 </div>
+
+    <?php $this->load->view('templates/footer') ?>
 </body>
 </html>

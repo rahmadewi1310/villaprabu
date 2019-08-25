@@ -26,11 +26,6 @@
       <div class="box box-default">
         <div class="box-header with-border">
           <h3 class="box-title">Tambah data kamar</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-          </div>
         </div>
         <!-- /.box-header -->
         <form action="http://localhost/villaprabu/Admin/MasterData/insertkamar/" method="post">
@@ -39,12 +34,12 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Nomor kamar</label>
-                  <input type="text" name="no_kamar" class="form-control" placeholder="isi nomor kamar!">
+                  <input type="text" name="no_kamar" class="form-control" placeholder="isi nomor kamar!" required>
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
                   <label>Harga</label>
-                  <input type="number" name="harga" class="form-control" placeholder="berapa harga kamar!">
+                  <input type="number" name="harga" class="form-control" placeholder="berapa harga kamar!" required>
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -52,7 +47,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Deskripsi</label>
-                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" ></textarea>
+                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Foto</label>
+                    <div class="form-group">
+                      <input type="file" id="input-file-now" class="dropify" name="img" />
+                    </div>
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -93,9 +95,12 @@
                     foreach($room as $a){?>
                 <tr>
                   <td><?php echo $a->no_kamar?></td>
-                  <td><?php echo $a->harga?></td>
+                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
                   <td><?php echo $a->desc?></td>
-                  <td></td>
+                  <td>
+                    <a href="<?php echo base_url('admin/masterdata/editkamar/'.$a->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>
+                    <a href="#" onclick="confDelete('<?=base_url('admin/masterdata/deletekamar/'.$a->id)?>')" class="btn btn-danger btn-xs">Delete</a>
+                  </td>
                 </tr>
                 <?php } ?>
               </tbody>
@@ -112,24 +117,6 @@
     <!-- /.content -->
     </div>
     <?php $this->load->view('templates/footer') ?>
-    <!-- Control Sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <script src="<?php echo base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-  <!-- Bootstrap 3.3.7 -->
-  <script src="<?php echo base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- SlimScroll -->
-  <script src="<?php echo base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-  <!-- FastClick -->
-  <script src="<?php echo base_url() ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?php echo base_url() ?>assets/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="<?php echo base_url() ?>assets/dist/js/demo.js"></script>
-  <script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-</script>
+
 </body>
 </html>

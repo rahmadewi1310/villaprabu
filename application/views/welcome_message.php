@@ -39,8 +39,8 @@
                 <div class="col-lg-10">
                     <div class="banner_text text-center">
                         <div class="banner_text_iner">
-                            <h1> Saintmartine</h1>
-                            <p>Let’s start your journey with us, your dream will come true</p>
+                            <h1> Villa Prabu</h1>
+                            <p>Rest comfortably and freely</p>
                             <a href="#booking" class="btn_1">Discover Now</a>
                         </div>
                     </div>
@@ -59,23 +59,23 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <div class="booking_form">
-                                    <form action="<?=base_url('/')?>" method="get">
-                                        <div class="form-row">
-                                            <div class="form_colum">
-                                                <input id="datepicker_1" value="<?=@$_GET['check_in']==''?date('d/m/Y'):$_GET['check_in']?>" type="text" name="check_in" placeholder="Check in date">
+                                    <form action="<?=base_url('/#booking')?>" method="get">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input class="form-control" min="<?=date('Y-m-d')?>" value="<?=$checkin?>" type="date" name="check_in" placeholder="Check in date">
                                             </div>
-                                            <div class="form_colum">
-                                                <input id="datepicker_2" value="<?=@$_GET['check_out']==''?date('d/m/Y'):$_GET['check_out']?>" type="text" name="check_out" placeholder="Check out date">
+                                            <div class="col-md-4">
+                                                <input class="form-control" min="<?=date('Y-m-d')?>" value="<?=$checkout?>" type="date" name="check_out" placeholder="Check out date">
                                             </div>
-                                            <div class="form_colum">
-                                                <select class="nc_select" name="person" required>
+                                            <div class="col-md-2">
+                                                <select class="form-control" name="person" required>
                                                     <option value='1' selected>1 Person</option>
                                                     <?php 
                                                     for($i = 2; $i <= 10; $i++){ echo "<option value=\"".$i."\">".$i." Persons</option>";}?>
                                                 </select>
                                             </div>
-                                            <div class="form_btn">
-                                                <button type="submit" class="btn_1">Search</button>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-warning">Search</button>
                                             </div>
                                             
                                         </div>
@@ -95,19 +95,23 @@
         <div class="container">
             <div class="row">
               <?php 
-                for ($i=0; $i < 10 ; $i++) {
+                if (count($room) <= 0) {
+                  echo "<div class=\"col-sm-12\"><p class=\"text-center\">No Result</p><br></div>";
+                }
+                foreach($room as $item) {
               ?>
                 <div class="col-sm-6">
                   <div style="display: inline-block; width: 100%; background-color: #ffffff; padding: 24px; margin-bottom: 24px; border: solid 1px #dfdfdf">
                     <div class="row">
                         <div class="col-lg-6">
-                          <img src="<?=base_url($path.'img/single_place_'.($i%4+1).'.png')?>" alt="">
+                          <img src="<?=base_url('uploads/'.($item->img==''?'standard-room.jpg':$item->img))?>" alt="">
                         </div>
                         <div class="col-lg-6">
-                          <h3 class="text-right">Standar Room - 10<?=$i?></h3>
-                          <h2 class="text-right"><?=number_format(250000)?></h2>
-                          <h4 class="text-right">2 persons</h4>
-                          <p class="text-right"><button class="btn btn-warning">BOOK</button></p>
+                          <h2 class="text-right"><?=$item->no_kamar?></h2>
+                          <p class="text-right">Include <?=$item->kapasitas?> persons</p>
+                          <h4 class="text-right"><?=$night?> nights x <?=number_format($item->harga, 2, ',', '.')?></h4>
+                          <h3 class="text-right"><b><?=number_format(($item->harga*$night), 2, ',', '.')?></b></h3>
+                          <p class="text-right"><a href="<?=base_url('?booking='.$item->id.'&check_in='.$checkin.'&check_out='.$checkout)?>" class="btn btn-warning">BOOK</a></p>
                           <p class="text-right"><a href="" class="btn btn-link">Detail</a></p>
                         </div>
                     </div>
