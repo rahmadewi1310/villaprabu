@@ -26,9 +26,10 @@ class login extends CI_Controller{
 				$this->session->set_flashdata('gagal', 'GAGAL!');
 				$this->load->view('admin/login');
 			}
-
-			// $input = $this->input->post();
-			// echo json_encode($this->M_admin->validasi($input['username'], $input['password']));
 		}
+	}
+	function logout(){
+		$this->session->sess_destroy();
+		redirect(base_url('admin/login'),'refresh');
 	}
 }

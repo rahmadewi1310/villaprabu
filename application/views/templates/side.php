@@ -40,9 +40,9 @@
       <li><a href="<?php echo base_url('admin/masterdata/admin') ?>"><i class="fa fa-users"></i>Data Admin </a></li>
       <li><a href="<?php echo site_url('admin/masterdata/kamar') ?>"><i class="fa fa-home"></i>Data Kamar</a></li>
       <li class="header">LAPORAN</li>
-      <li><a href="<?php echo base_url('admin/laporan/booking') ?>"><i class="fa fa-tags"></i>Laporan Booking</a></li>
-      <li><a href="<?php echo site_url('admin/laporan/pelanggan') ?>"><i class="fa fa-user"></i>Laporan Pelanggan</a></li>
-      <li><a href="<?php echo site_url('admin/laporan/kamar') ?>"><i class="fa fa-home"></i>Laporan Kamar</a></li>
+      <li><a href="<?php echo base_url('admin/report/reportbooking') ?>"><i class="fa fa-tags"></i>Laporan Booking</a></li>
+      <li><a href="<?php echo site_url('admin/report/reportpelanggan') ?>"><i class="fa fa-user"></i>Laporan Pelanggan</a></li>
+      <li><a href="<?php echo site_url('admin/report/reportkamar') ?>"><i class="fa fa-home"></i>Laporan Kamar</a></li>
       
     </ul>
   </li>
