@@ -15,4 +15,8 @@ class M_kamar extends CI_Model{
     // echo "{\"sql\":\"".$sql."\", \"data\":";
     return $this->db->query($sql)->result();
   }
+
+  function get_kamar($id){
+    return $this->db->get_where('tb_room', ['id' => $id])->row();
+  }
 }
