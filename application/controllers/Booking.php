@@ -12,7 +12,35 @@ class Booking extends CI_Controller{
       $alamat = $this->input->post('alamat');
       $no_rek = $this->input->post('no_rek');
 
-      
+      $i = 0; $tagihan = array();
+      foreach ($data['tagihan'] as $item) {
+        $tagihan[$i] = array(
+          'tanggal' => date('Y-m-d'),
+          'room_id' => $item['room_id'],
+          'harga' => $item['biaya']
+        );
+        $i++;
+      }
+
+      $this->load->model('M_booking');
+      $result = $this->M_booking->create_booking(
+        array(
+          'nama' => $nama,
+          'email' => $email,
+          'phone' => $phone,
+          'alamat' => $alamat,
+          'no_rek' => $nama
+        ),
+        array(
+          'tgl_book' => date('Y-m-d'),
+          'status' => 'BARU'
+        ),
+        $tagihan
+      );
+      if ($result != null) {
+        $this->session->set_userdata('id_booking', $result);
+      }
+      redirect('/');
     }
   }
 

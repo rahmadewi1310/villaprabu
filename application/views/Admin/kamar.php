@@ -28,9 +28,10 @@
           <h3 class="box-title">Tambah data kamar</h3>
         </div>
         <!-- /.box-header -->
-        <form action="http://localhost/villaprabu/Admin/MasterData/insertkamar/" method="post">
-          <div class="box-body">
-            <div class="row">
+
+        <div class="box-body">
+          <?php echo form_open_multipart('Admin/MasterData/insertkamar','class="form-horizontal"'); ?>
+            <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Nomor kamar</label>
@@ -47,14 +48,12 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Deskripsi</label>
-                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" required></textarea>
+                  <textarea class="form-control" name="desc" rows="2" placeholder="Isi deskripsi tentang kamar" required></textarea>
                 </div>
 
                 <div class="form-group">
                   <label>Foto</label>
-                    <div class="form-group">
-                      <input type="file" id="input-file-now" class="dropify" name="img" />
-                    </div>
+                    <input type="file" id="input-file-now" class="dropify" name="img" required>
                 </div>
                 <!-- /.form-group -->
               </div>
@@ -66,8 +65,9 @@
           <div class="box-footer">
             <input type="submit" name="submit" value="Simpan" class="btn btn-success">
           </div>
-        </form>
-      </div>
+
+        </div>
+      <?php echo form_close(); ?>
     </section>
 
       <!-- data tables -->
@@ -84,9 +84,10 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Nomor Kamar</th>
-                  <th>Harga</th>
+                  <th>Foto</th>
                   <th>Deskripsi</th>
+                  <th>Harga</th>
+                  <th>Nomor Kamar</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
@@ -94,9 +95,18 @@
                   <?php
                     foreach($room as $a){?>
                 <tr>
-                  <td><?php echo $a->no_kamar?></td>
-                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
+                  <td>
+                    <img width="100px" height="100px" src="<?php 
+                      if ($a->img =="") {
+                        echo base_url('/uploads/standard-room.jpg');
+                      }else{
+                        echo base_url('/uploads/'.$a->img);
+                      }
+                      ?>">
+                  </td>
                   <td><?php echo $a->desc?></td>
+                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
+                  <td><?php echo $a->no_kamar?></td>
                   <td>
                     <a href="<?php echo base_url('admin/masterdata/editkamar/'.$a->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>
                     <a href="#" onclick="confDelete('<?=base_url('admin/masterdata/deletekamar/'.$a->id)?>')" class="btn btn-danger btn-xs">Delete</a>
