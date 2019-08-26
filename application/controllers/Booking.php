@@ -15,7 +15,7 @@ class Booking extends CI_Controller{
       $i = 0; $tagihan = array();
       foreach ($data['tagihan'] as $item) {
         $tagihan[$i] = array(
-          'tanggal' => date('Y-m-d'),
+          'tanggal' => $item['date'],
           'room_id' => $item['room_id'],
           'harga' => $item['biaya']
         );
@@ -29,7 +29,7 @@ class Booking extends CI_Controller{
           'email' => $email,
           'phone' => $phone,
           'alamat' => $alamat,
-          'no_rek' => $nama
+          'no_rek' => $no_rek
         ),
         array(
           'tgl_book' => date('Y-m-d'),
@@ -40,8 +40,18 @@ class Booking extends CI_Controller{
       if ($result != null) {
         $this->session->set_userdata('id_booking', $result);
       }
-      redirect('/');
     }
+    redirect('booking/open/'.$result);
+  }
+
+  function open($id = null){
+    if ($id == null) {
+      $id = $this->input->get('kode');
+    }
+    $this->load->model('M_booking');
+    $data['data'] = $this->M_booking->get_booking($id);
+    $this->load->view('check_booking', $data);
+    echo json_encode($data);
   }
 
 }

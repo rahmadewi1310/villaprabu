@@ -55,8 +55,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <div class="booking_menu">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                            <a class="nav-link active" id="hotel-tab" data-toggle="tab" href="#hotel" role="tab" aria-controls="hotel" aria-selected="true">Booking</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" id="tricket-tab" data-toggle="tab" href="#claim-payment" role="tab" aria-controls="tricket" aria-selected="false">Klaim Pembayaran</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
                     <div class="booking_content">
                         <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade" id="claim-payment" role="tabpanel" aria-labelledby="hotel-tab">
+                                <div class="booking_form">
+                                    <form action="<?=base_url('booking/open#booking')?>" method="get">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" name="kode" placeholder="Kode booking" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-warning">SEARCH</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="tab-pane fade show active" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <div class="booking_form">
                                     <form action="<?=base_url('/#booking')?>" method="get">
@@ -81,6 +107,38 @@
                                         </div>
                                     </form>
                                 </div>
+                                <br>
+                                <div class="booking_form">
+                                    <div class="row">
+                                      <?php 
+                                        if (count($room) <= 0) {
+                                          echo "<div class=\"col-sm-12\"><p class=\"text-center\">No Result</p><br></div>";
+                                        }
+                                        foreach($room as $item) {
+                                      ?>
+                                        <div class="col-sm-6">
+                                          <div style="display: inline-block; width: 100%; background-color: #ffffff; padding: 24px; margin-bottom: 24px; border: solid 1px #dfdfdf">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                  <img src="<?=base_url('uploads/'.($item->img==''?'standard-room.jpg':$item->img))?>" alt="">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                  <h2 class="text-right"><?=$item->no_kamar?></h2>
+                                                  <p class="text-right">Include <?=$item->kapasitas?> persons</p>
+                                                  <h4 class="text-right"><?=$night?> nights x <?=number_format($item->harga, 2, ',', '.')?></h4>
+                                                  <h3 class="text-right"><b><?=number_format(($item->harga*$night), 2, ',', '.')?></b></h3>
+                                                  <p class="text-right"><a href="<?=base_url('?booking='.$item->id.'&check_in='.$checkin.'&check_out='.$checkout)?>" class="btn btn-warning">BOOK</a></p>
+                                                  <p class="text-right"><a href="" class="btn btn-link">Detail</a></p>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <?php
+                                        } 
+                                      ?>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,35 +151,7 @@
     <!--top place start-->
     <section class="top_place" style="margin-top: 24px">
         <div class="container">
-            <div class="row">
-              <?php 
-                if (count($room) <= 0) {
-                  echo "<div class=\"col-sm-12\"><p class=\"text-center\">No Result</p><br></div>";
-                }
-                foreach($room as $item) {
-              ?>
-                <div class="col-sm-6">
-                  <div style="display: inline-block; width: 100%; background-color: #ffffff; padding: 24px; margin-bottom: 24px; border: solid 1px #dfdfdf">
-                    <div class="row">
-                        <div class="col-lg-6">
-                          <img src="<?=base_url('uploads/'.($item->img==''?'standard-room.jpg':$item->img))?>" alt="">
-                        </div>
-                        <div class="col-lg-6">
-                          <h2 class="text-right"><?=$item->no_kamar?></h2>
-                          <p class="text-right">Include <?=$item->kapasitas?> persons</p>
-                          <h4 class="text-right"><?=$night?> nights x <?=number_format($item->harga, 2, ',', '.')?></h4>
-                          <h3 class="text-right"><b><?=number_format(($item->harga*$night), 2, ',', '.')?></b></h3>
-                          <p class="text-right"><a href="<?=base_url('?booking='.$item->id.'&check_in='.$checkin.'&check_out='.$checkout)?>" class="btn btn-warning">BOOK</a></p>
-                          <p class="text-right"><a href="" class="btn btn-link">Detail</a></p>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              <?php
-                } 
-              ?>
-                
-            </div>
+            
         </div>
     </section>
     <!--top place end-->

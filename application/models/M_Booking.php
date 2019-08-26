@@ -40,4 +40,39 @@ class M_booking extends CI_Model{
   function create_booking_id(){
     return date('YmdHis').(explode(" ", microtime())[1]);
   }
+
+  function get_booking($id = null){
+    if ($id == null) {
+      return null;
+    }else{
+      $book = $this->db->query("SELECT 
+                    tb_book.*, 
+                    tb_pelanggan.nama as 'nama_pelanggan',
+                    tb_pelanggan.email as 'email',
+                    tb_pelanggan.phone as 'phone',
+                    count(tb_detail_book.id) as 'night', 
+                    sum(tb_detail_book.harga) as 'total'
+                    FROM tb_book LEFT JOIN tb_pelanggan ON tb_book.id_pelanggan = tb_pelanggan.id 
+                    LEFT JOIN tb_detail_book ON tb_detail_book.book_id = tb_book.id 
+                    WHERE tb_book.id = '$id'")->row_array();
+      if ($book != null) {
+        $detail = $this->db->query("SELECT tb_detail_book.*, 
+                    tb_room.no_kamar as 'nama_kamar'
+                    FROM tb_detail_book LEFT JOIN tb_room ON tb_detail_book.room_id = tb_room.id 
+                    WHERE tb_detail_book.book_id = '$id';")->result_array();
+        $i = 0;
+        foreach ($detail as $item) {
+          $detail[$i]['detail'] = $this->db->query("SELECT * FROM tb_item_layanan WHERE book_detail_id = '".$item['id']."'")->result_array();
+          $i++;
+        }
+
+        if ($i > 0) {
+          $book['checkin'] = $detail[0]['tanggal'];
+          $book['checkout'] = $detail[count($detail) -1]['tanggal'];
+        }
+        $book['detail'] = $detail;
+      }
+      return $book;
+    }
+  }
 }

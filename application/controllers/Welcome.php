@@ -15,8 +15,8 @@ class Welcome extends CI_Controller {
 			$person = $this->input->get('person');
 			$data['checkin'] = ($checkin == null)?date("Y-m-d"):$checkin;
 			$data['checkout'] = ($checkout == null)?(((new DateTime($data['checkin']))->modify('+1 day'))->format('Y-m-d')):$checkout;
-			$data['night'] = ((new DateTime($checkout))->diff(new DateTime($checkin)))->days;
-			$data['room'] = $this->M_kamar->cari_kamar($checkin, $checkout, $person);
+			$data['night'] = ((new DateTime($data['checkin']))->diff(new DateTime($data['checkout'])))->days;
+			$data['room'] = $this->M_kamar->cari_kamar($data['checkin'], $data['checkout'], $person);
 			// echo "}";
 			$this->load->view('welcome_message', $data);
 		}
