@@ -27,11 +27,21 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th style="width: 10px">No</th>
+                                    <th>Pelanggan</th>
                                     <th>Checkin</th>
                                     <th>Checkout</th>
-                                    <th>Pelanggan</th>
                                     <th>Total</th>
                                 </tr>
+                                <?php
+                                    for($i=1; $i<11; $i++){?>
+                                <tr>
+                                    <td style="width: 10px">No</td>
+                                    <td>Pelanggan<?=$i?></td>
+                                    <td>Checkin<?=$i?></td>
+                                    <td>checkout<?=$i?></td>
+                                    <td>Total<?=$i?></td>
+                                </tr>
+                                <?php }?>
                             </table>
                         </div>
                     </div>

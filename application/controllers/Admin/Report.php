@@ -27,25 +27,23 @@ class Report extends CI_Controller {
 	    $pdf->SetAuthor('Author');
 	    $pdf->SetDisplayMode('real', 'default');
 	    $pdf->AddPage();
-	    $html='<h3>Daftar Transaksi Kamar</h3>
+	    $html='<h3 align="center">Laporan Booking</h3>
 	            <table cellspacing="1" bgcolor="#666666" cellpadding="2">
 	                <tr bgcolor="#ffffff">
-	                    <th width="5%" align="center">No</th>
-	                    <th width="20%" align="center">Nama</th>
-	                    <th width="20%" align="center">Tgl In</th>
-	                    <th width="15%" align="center">Tgl Out</th>
-	                    <th width="15%" align="center">Nomor Kamar</th>
-	                    <th width="15%" align="center">Status</th>
+	                    <th style="width: 30px">No</th>
+                        <th>Pelanggan</th>
+                        <th>Checkin</th>
+                        <th>Checkout</th>
+                        <th>Total</th>
 	                </tr>';
 	    for ($i=1; $i<10; $i++)
 	        {
 	            $html.='<tr bgcolor="#ffffff">
-	                    <td align="center">'.$i.'</td>
-	                    <td> Nama'.$i.'</td>
-	                    <td>tgl in'.$i.'</td>
-	                    <td>tgl out'.$i.'</td>
-	                    <td>no'.$i.'</td>
-	                    <td>status'.$i.'</td>
+		            	<td>'.$i.'</td>
+		            	<td>Pelanggan'.$i.'</td>
+		            	<td>Checkin'.$i.'</td>
+		            	<td>Checkout'.$i.'</td>
+		            	<td>Total'.$i.'</td>
 	                </tr>';
 	        }
 	    $html.='</table>';
