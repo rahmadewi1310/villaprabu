@@ -14,6 +14,10 @@ class Book extends CI_Controller {
 		$data = array('book' => $this->M_booking->select()->result(), );
 		$this->load->view('admin/book', $data);
 	}
+	function detailbook(){
+		$data = array('book' => $this->M_booking->select()->result(), );	
+		$this->load->view('admin/detailbook', $data);
+	}
 
 }
 

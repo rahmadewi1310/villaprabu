@@ -53,7 +53,7 @@
                   <td><?=$a->nama?></td>
                   <td><?=$a->status?></td>
                   <td>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+                    <a href="<?php echo base_url('admin/book/detailbook') ?>" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
                       Detail
                     </button>
                     <button type="button" class="btn btn-sm btn-info">Konfirmasi</button>
