@@ -84,10 +84,10 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Nomor Kamar</th>
-                  <th>Harga</th>
-                  <th>Deskripsi</th>
                   <th>Foto</th>
+                  <th>Deskripsi</th>
+                  <th>Harga</th>
+                  <th>Nomor Kamar</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
@@ -95,9 +95,6 @@
                   <?php
                     foreach($room as $a){?>
                 <tr>
-                  <td><?php echo $a->no_kamar?></td>
-                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
-                  <td><?php echo $a->desc?></td>
                   <td>
                     <img width="100px" height="100px" src="<?php 
                       if ($a->img =="") {
@@ -107,6 +104,9 @@
                       }
                       ?>">
                   </td>
+                  <td><?php echo $a->desc?></td>
+                  <td><?php echo "Rp. ".number_format($a->harga)?></td>
+                  <td><?php echo $a->no_kamar?></td>
                   <td>
                     <a href="<?php echo base_url('admin/masterdata/editkamar/'.$a->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>
                     <a href="#" onclick="confDelete('<?=base_url('admin/masterdata/deletekamar/'.$a->id)?>')" class="btn btn-danger btn-xs">Delete</a>
