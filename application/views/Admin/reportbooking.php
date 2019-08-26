@@ -30,18 +30,26 @@
                                     <th>Pelanggan</th>
                                     <th>Checkin</th>
                                     <th>Checkout</th>
+                                    <th>Tanggal Booking</th>
                                     <th>Total</th>
                                 </tr>
-                                <?php
-                                    for($i=1; $i<11; $i++){?>
+                                <?php $a=0;
+                                    foreach ($book as $i) {
+                                        $a++;    
+                                    ?>
                                 <tr>
-                                    <td style="width: 10px">No</td>
-                                    <td>Pelanggan<?=$i?></td>
-                                    <td>Checkin<?=$i?></td>
-                                    <td>checkout<?=$i?></td>
-                                    <td>Total<?=$i?></td>
+                                    <td style="width: 10px"><?=$a?></td>
+                                    <td><?=$i->nama?></td>
+                                    <td><?=$i->checkin?></td>
+                                    <td><?=$i->checkout?></td>
+                                    <td><?=$i->tgl_book?></td>
+                                    <td>total</td>
                                 </tr>
                                 <?php }?>
+                                <tr>
+                                    <td colspan="5" align="right">total</td>
+                                    <td>Rp.00000</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
