@@ -60,16 +60,8 @@
                     <a href="<?=base_url('admin/book/detail/'.$a->id) ?>" type="button" class="btn btn-default">
                       Detail
                     </a>
-
-                    <?php if($a->checkin == null){ ?>
-                    <a href="<?=base_url('admin/book/checkin/'.$a->id) ?>" type="button" class="btn btn-success">
-                      Checkin
-                    </a>
-                    <?php } if ($a->checkout == null) { ?> 
-                    <a href="<?=base_url('admin/book/checkout/'.$a->id) ?>" type="button" class="btn btn-danger">
-                      Checkout
-                    </a>
-                    <?php } ?>
+                      <a href="<?=base_url('admin/book/konfirmasi/'.$a->id) ?>" class="btn btn-sm btn-info">Konfirmasi</button>
+                      <a href="<?=base_url('admin/book/reject/'.$a->id) ?>" class="btn btn-sm btn-danger">TOLAK</button>
                   </td>
                 </tr>
                 <?php } ?>

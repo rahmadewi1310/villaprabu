@@ -10,8 +10,13 @@ class Book extends CI_Controller {
 	}
 
 	public function index(){
-		$data = array('book' => $this->M_booking->select()->result(), );
+		$data = array('book' => $this->M_booking->select('TERKONFIRMASI')->result(), );
 		$this->load->view('admin/book', $data);
+	}
+
+	public function booking_order(){
+		$data = array('book' => $this->M_booking->select('BARU')->result(), );
+		$this->load->view('admin/book_order', $data);
 	}
 
 	public function detail($id){
@@ -21,10 +26,22 @@ class Book extends CI_Controller {
 	}
 
 	public function konfirmasi($id = null){
-		if ($id == null) {
-			redirect('admin/book');
-		}
+		if ($id != null) 
+			$this->M_booking->update($id, ['status' => 'TERKONFIRMASI']);
 
+		redirect('admin/book/booking_order');
+	}
+
+	public function reject($id = null){
+		if ($id != null) 
+			$this->M_booking->delete($id);
+
+		redirect('admin/book/booking_order');
+	}
+
+	
+	public function tambah_layanan($id_book=null){
+		$this->load->view('admin/tambah_layanan');
 	}
 
 }

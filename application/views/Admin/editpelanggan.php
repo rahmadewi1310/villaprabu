@@ -28,50 +28,54 @@
           <h3 class="box-title"> data kamar</h3>
         </div>
         <!-- /.box-header -->
-
-        <?php echo form_open_multipart('Admin/MasterData/updatekamar/'.$id,'class="form-horizontal"'); ?>
-          <div class="box-body">
-            <div class="row">
+        <div class="box-body">
+          <?php echo form_open_multipart('Admin/MasterData/updatepelanggan/'.$id,'class="form-horizontal"'); ?>
+            <div class="form-row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Nomor kamar</label>
-                  <input type="text" name="no_kamar" class="form-control" placeholder="isi nomor kamar!" value="<?=$room->no_kamar?>" required>
+                  <label>Nama</label>
+                  <input type="text" name="nama" class="form-control" value="<?=$pelanggan->nama?>" placeholder="Nama Pelanggan" required>
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Harga</label>
-                  <input type="number" name="harga" class="form-control" placeholder="berapa harga kamar!" value="<?=$room->harga?>" required>
+                  <label>Email</label>
+                  <input type="email" name="email" class="form-control" value="<?=$pelanggan->email?>" placeholder="Email pelanggan" required>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                  <label>Telepon</label>
+                  <input type="number" name="phone" class="form-control" value="<?=$pelanggan->phone?>" placeholder="Telepon pelanggan" required>
+                </div>
+                <div class="form-group">
+                  <label>Alamat</label>
+                  <textarea class="form-control" name="alamat" rows="2" placeholder="Alamat pelanggan" required> <?=$pelanggan->alamat?></textarea>
                 </div>
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
               <div class="col-md-6">
+                <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Deskripsi</label>
-                  <textarea class="form-control" name="desc" rows="3" placeholder="Isi deskripsi tentang kamar" required><?=$room->desc?></textarea>
+                  <label>No Rekening</label>
+                  <input type="number" name="no_rek" class="form-control" value="<?=$pelanggan->no_rek?>" placeholder="No rekening pelanggan!" required>
                 </div>
                 <div class="form-group">
                   <label>Foto</label></br>
                   <?php 
-                      if ($room->img =="") {
+                      if ($pelanggan->img =="") {
                         echo "Tidak ada gambar";
                         }else{?>
                     <img width="100px" height="100px" src="<?php echo base_url('/uploads/'.$pelanggan->img); ?>">
                   <?php } ?>
                     <input type="file" id="input-file-now" class="dropify" name="img" required>
                 </div>
-                <!-- /.form-group -->
               </div>
-              <!-- /.col -->
             </div>
-            <!-- /.row -->
           </div>
-          <!-- /.box-body -->
           <div class="box-footer">
             <input type="submit" name="submit" value="Simpan" class="btn btn-success">
           </div>
-
-        <?php echo form_close(); ?>
+          <?php echo form_close(); ?>
       </div>
     </section>
     <!-- /.content -->

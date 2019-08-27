@@ -59,8 +59,10 @@
                   </tr>
                 </b>
               </table>
-              <div class="row"><div class="col-md-8">
-              <h4>Detail : </h4>
+              <div class="row"><div class="col-md-6">
+              <a href="<?=base_url('admin/book/tambah_layanan/'.$data['id'])?>" class="btn btn-primary">Tambah Layanan</a>
+              
+              <h3>Detail : </h3>
               <table id="example2" class="table table-bordered table-striped table-hover">
                 <tbody>
                 <?php
@@ -68,7 +70,7 @@
                   foreach ($data['detail'] as $item) {
                     echo "
                   <tr>
-                    <td>".date('D, d F Y', strtotime($item['tanggal']))."
+                    <td colspan='".(count($item['detail'])>0?2:1)."'>".date('D, d F Y', strtotime($item['tanggal']))."
                     <br/><b>".$item['tipe']."</b>";
 
                     if (count($item['detail']) > 0) {
@@ -94,19 +96,19 @@
                         $item['harga'] += ($sub['harga'] * $sub['jumlah']);
                       }
                       echo "</table>";
-                    }
+                    }else echo "<td>".$item['nama_kamar']."</td>";
                   echo "
                     </td>
                     <th class='text-right'>".number_format($item['harga'], 2, ',','.')."</th>
                   </tr>";
                     $total += $item['harga'];
                   }
-                  echo "<tr><th class='text-right'>TOTAL</th><th class='text-right'>".number_format($total, 2, ',','.')."</th></tr>";
+                  echo "<tr><th class='text-right' colspan='2'>TOTAL</th><th class='text-right'>".number_format($total, 2, ',','.')."</th></tr>";
                 ?>
               </tbody>
             </table>
-            </div><div class="col-md-4">
-            Pembayaran : 
+            </div><div class="col-md-6">
+            <h3>Pembayaran : </h3>
             <table class="table table-bordered">
               <tr>
                     <th>Tanggal</th>
@@ -122,7 +124,7 @@
                   echo "<tr>
                     <td>".date('D, d F Y', strtotime($item['tanggal']))."</td>
                     <td>".$item['tipe']."</td>
-                    <td>".number_format($item['nominal'], 2, ',','.')."</td>
+                    <td class='text-right'>".number_format($item['nominal'], 2, ',','.')."</td>
                   </tr>";
                   $total_bayar += $item['nominal'];
                 }
@@ -136,6 +138,7 @@
             <?php
             echo "<h2 class='text-right'>".number_format(($total - $total_bayar), 2, ',', '.')."</h2>"; 
             ?>
+            <p class="text-right"><a href="<?=base_url('admin/book/tambah_pembayaran/'.$data['id'])?>" class="btn btn-primary">Tambah Pembayaran</a></p>
             </div></div>
           </div>
         </div>

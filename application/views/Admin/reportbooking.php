@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Laporan Booking</h3>
+                            <h1 class="box-title">Laporan Booking</h1>
                             <a href="<?php echo base_url('admin/report/cetakreportbooking') ?>" type="button" class="pull-right btn btn-primary">Cetak Pdf</a>
                         </div>
                 <!-- /.box-header -->
@@ -39,7 +39,7 @@
                                     ?>
                                 <tr>
                                     <td style="width: 10px"><?=$a?></td>
-                                    <td><?=$i->nama?></td>
+                                    <td><?=$i->nama_pelanggan?></td>
                                     <td><?=$i->checkin?></td>
                                     <td><?=$i->checkout?></td>
                                     <td><?=$i->tgl_book?></td>
