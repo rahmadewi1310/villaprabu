@@ -9,7 +9,7 @@ class M_booking extends CI_Model{
   //Codeigniter : Write Less Do More
   }
   function select(){
-    $this->db->select('tb_book.*,tb_pelanggan.*');
+    $this->db->select('tb_book.*,tb_pelanggan.nama, tb_pelanggan.email, tb_pelanggan.phone, tb_pelanggan.alamat, tb_pelanggan.no_rek');
     $this->db->from('tb_book');
     $this->db->join('tb_pelanggan', 'tb_book.id_pelanggan = tb_pelanggan.id', 'left');
     return $this->db->get();
@@ -59,7 +59,7 @@ class M_booking extends CI_Model{
         $detail = $this->db->query("SELECT tb_detail_book.*, 
                     tb_room.no_kamar as 'nama_kamar'
                     FROM tb_detail_book LEFT JOIN tb_room ON tb_detail_book.room_id = tb_room.id 
-                    WHERE tb_detail_book.book_id = '$id';")->result_array();
+                    WHERE tb_detail_book.book_id = '$id'  ORDER BY tb_detail_book.tanggal ASC;")->result_array();
         $i = 0;
         foreach ($detail as $item) {
           $detail[$i]['detail'] = $this->db->query("SELECT * FROM tb_item_layanan WHERE book_detail_id = '".$item['id']."'")->result_array();
@@ -71,6 +71,8 @@ class M_booking extends CI_Model{
           $book['checkout'] = $detail[count($detail) -1]['tanggal'];
         }
         $book['detail'] = $detail;
+
+        $book['pembayaran'] = $this->db->get_where('tb_pembayaran', ['book_id' => $id])->result_array();
       }
       return $book;
     }

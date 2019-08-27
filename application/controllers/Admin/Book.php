@@ -9,14 +9,22 @@ class Book extends CI_Controller {
 		$this->load->model('M_booking');
 	}
 
-	public function index()
-	{
+	public function index(){
 		$data = array('book' => $this->M_booking->select()->result(), );
 		$this->load->view('admin/book', $data);
 	}
-	public function detailbook(){
-		$data = array('book' => $this->M_booking->select()->result(), );	
+
+	public function detail($id){
+		$data['data'] = $this->M_booking->get_booking($id);	
 		$this->load->view('admin/detailbook', $data);
+		echo json_encode($data);
+	}
+
+	public function konfirmasi($id = null){
+		if ($id == null) {
+			redirect('admin/book');
+		}
+
 	}
 	public function tambah_layanan($id_book=null){
 		$this->load->view('admin/tambah_layanan');

@@ -51,7 +51,7 @@ class Booking extends CI_Controller{
     $this->load->model('M_booking');
     $data['data'] = $this->M_booking->get_booking($id);
     $this->load->view('check_booking', $data);
-    echo json_encode($data);
+    // echo json_encode($data);
   }
 
 }
