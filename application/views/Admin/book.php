@@ -33,11 +33,12 @@
                 <thead>
                 <tr>
                   <!-- checkin, checkout, tgl_book, bukti bayar, nama pelanggan, status -->
+                  <th>Kode Booking</th>
+                  <th>Tanggal Booking</th>
                   <th>Checkin</th>
                   <th>Checkout</th>
-                  <th>Tanggal Booking</th>
-                  <th>Bukti Bayar</th>
                   <th>Pelanggan</th>
+                  <th>Bukti Bayar</th>
                   <th>Status</th>
                   <th></th>
                 </tr>
@@ -46,6 +47,7 @@
                   <?php
                     foreach($book as $a){?>
                 <tr>
+                  <td><?=$a->id?></td>
                   <td><?=$a->checkin?></td>
                   <td><?=$a->checkout?></td>
                   <td><?=$a->tgl_book?></td>
@@ -53,7 +55,7 @@
                   <td><?=$a->nama?></td>
                   <td><?=$a->status?></td>
                   <td>
-                    <a href="<?php echo base_url('admin/book/detailbook') ?>" type="button" class="btn btn-default">
+                    <a href="<?php echo base_url('admin/book/detail/'.$a->id) ?>" type="button" class="btn btn-default">
                       Detail
                     </a>
                     <button type="button" class="btn btn-sm btn-info">Konfirmasi</button>

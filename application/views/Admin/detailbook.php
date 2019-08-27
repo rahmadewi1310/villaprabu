@@ -29,62 +29,114 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-
+              <h3>KODE : <b><?=$data['id']?></b></h3>
               <table>
                 <b>
                   <tr>
                     <td width="150px">Pelanggan</td>
                     <td width="10px">:</td>
-                    <td>Yan Mastra</td>
+                    <td><?=$data['nama_pelanggan']?></td>
                   </tr>
                   <tr>
-                    <td>Nomor Booking</td>
-                    <td>:</td>
-                    <td>12356789</td>
+                    <td width="150px">Email Pelanggan</td>
+                    <td width="10px">:</td>
+                    <td><?=$data['email']?></td>
+                  </tr>
+                  <tr>
+                    <td width="150px">No. HP Pelanggan</td>
+                    <td width="10px">:</td>
+                    <td><?=$data['phone']?></td>
                   </tr>
                   <tr>
                     <td>Checkin</td>
                     <td>:</td>
-                    <td>10 mei 2019</td>
+                    <td><?=date('D, d F Y', strtotime($data['checkin']))?></td>
                   </tr>
                   <tr>
                     <td>Checkout</td>
                     <td>:</td>
-                    <td>20 mei 2019</td>
+                    <td><?=date('D, d F Y', strtotime($data['checkout']))?></td>
                   </tr>
                 </b>
               </table>
-              <table id="example2" class="table table-bordered table-hover">
+              <div class="row"><div class="col-md-8">
+              <h4>Detail : </h4>
+              <table id="example2" class="table table-bordered table-striped table-hover">
                 <tbody>
-                <tr>
-                  <td colspan="4">Tanggal 10 Mei 2019 <br/><b> Tagihan Kamar<b/></td>
-                  <td>150.000</td>
-                </tr>
-                <tr>
-                  <td colspan="5">Tanggal 10 Mei 2019 <br/><b> Tagihan Layanan<b/></td>
-                </tr>
-                <tr>
-                  <td>No</td>
-                  <td>Layanan</td>
-                  <td>Jumlah</td>
-                  <td>Harga</td>
-                  <td>Subtotal</td>
-                </tr>
-                <?php for($i = 1; $i<10; $i++){ ?>
+                <?php
+                  $total = 0;
+                  foreach ($data['detail'] as $item) {
+                    echo "
                   <tr>
-                  <td><?=$i?></td>
-                  <td>Layanan <?=$i?></td>
-                  <td>Jumlah <?=$i?></td>
-                  <td>Harga <?=$i?></td>
-                  <td>Subtotal <?=$i?></td>
-                </tr>
-                <?php } ?>
-                <tr>
-                  <td colspan="4" align="right">Total</td>
-                  <td>9000000</td>
-                </tr>
+                    <td>".date('D, d F Y', strtotime($item['tanggal']))."
+                    <br/><b>".$item['tipe']."</b>";
+
+                    if (count($item['detail']) > 0) {
+                      echo "<table class='table'>
+                        <tr>
+                          <th>No.</th>
+                          <th>Produk/Layanan</th>
+                          <th class='text-right'>Jumlah</th>
+                          <th class='text-right'>Harga satuan</th>
+                          <th class='text-right'>Subtotal</th>
+                        </tr>
+                      ";
+                      $i = 1;
+                      foreach ($item['detail'] as $sub) {
+                        echo "<tr>
+                          <td>".$i."</td>
+                          <td>".$sub['remark']."</td>
+                          <td class='text-right'>".$sub['jumlah']." x </td>
+                          <td class='text-right'>".number_format($sub['harga'], 2, ',','.')."</td>
+                          <td class='text-right'>".number_format(($sub['harga'] * $sub['jumlah']), 2, ',','.')."</td>
+                        </tr>";
+                        $i++;
+                        $item['harga'] += ($sub['harga'] * $sub['jumlah']);
+                      }
+                      echo "</table>";
+                    }
+                  echo "
+                    </td>
+                    <th class='text-right'>".number_format($item['harga'], 2, ',','.')."</th>
+                  </tr>";
+                    $total += $item['harga'];
+                  }
+                  echo "<tr><th class='text-right'>TOTAL</th><th class='text-right'>".number_format($total, 2, ',','.')."</th></tr>";
+                ?>
               </tbody>
             </table>
+            </div><div class="col-md-4">
+            Pembayaran : 
+            <table class="table table-bordered">
+              <tr>
+                    <th>Tanggal</th>
+                    <th>Tipe</th>
+                    <th>Nominal</th>
+                  </tr>
+              <?php
+                $total_bayar = 0;
+                if (count($data['pembayaran']) <= 0) {
+                  echo "<tr><td colspan='3' class='text-center'>Belum ada pembayaran</td></tr>";
+                }else
+                foreach ($data['pembayaran'] as $item) {
+                  echo "<tr>
+                    <td>".date('D, d F Y', strtotime($item['tanggal']))."</td>
+                    <td>".$item['tipe']."</td>
+                    <td>".number_format($item['nominal'], 2, ',','.')."</td>
+                  </tr>";
+                  $total_bayar += $item['nominal'];
+                }
+                echo "<tr>
+                    <td colspan='2'>TOTAL BAYAR</td>
+                    <th class='text-right'>".number_format($total_bayar, 2, ',','.')."</th>
+                  </tr>";
+              ?>
+            </table>
+            <p class="text-right">TOTAL BELUM DIBAYAR </p>
+            <?php
+            echo "<h2 class='text-right'>".number_format(($total - $total_bayar), 2, ',', '.')."</h2>"; 
+            ?>
+            </div></div>
           </div>
         </div>
       </div>

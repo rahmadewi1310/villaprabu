@@ -72,20 +72,25 @@
                             <div class="tab-pane fade show active" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <div class="booking_form">
                                     <h3>Detail</h3>
-                                    <table class="table">
+                                    <table class="table table-bordered">
                                         <?php
+                                        $total = 0;
                                         foreach($data['detail'] as $item){
                                             echo "<tr>
                                                 <td>".date('D, d F Y', strtotime($item['tanggal']))."
-                                                    <br>
-                                                    $item['tipe']
+                                                    <br><small>".$item['tipe']."</small>
                                                 </td>
 
                                                 <td>".$item['nama_kamar']."</td>
                                                 <td class='text-right'>Rp ".number_format($item['harga'], 2, ',', '.')."</td>
                                             </tr>";
+                                            $total += $item['harga'];
                                         }
                                         ?>
+                                        <tr>
+                                            <td colspan="2">TOTAL</td>
+                                            <td>Rp <?=number_format($total, 2, ',', '.')?></td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
