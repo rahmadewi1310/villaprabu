@@ -34,8 +34,11 @@
                                     <th>Total</th>
                                 </tr>
                                 <?php $a=0;
+                                    $total = 0;
                                     foreach ($book as $i) {
-                                        $a++;    
+                                        $a++;  
+                                        $subtotal = ($i->tagihan_kamar + $i->tagihan_layanan);
+                                        $total += $subtotal;  
                                     ?>
                                 <tr>
                                     <td style="width: 10px"><?=$a?></td>
@@ -43,12 +46,12 @@
                                     <td><?=$i->checkin?></td>
                                     <td><?=$i->checkout?></td>
                                     <td><?=$i->tgl_book?></td>
-                                    <td>total</td>
+                                    <td><?=$subtotal?></td>
                                 </tr>
                                 <?php }?>
                                 <tr>
                                     <td colspan="5" align="right">total</td>
-                                    <td>Rp.00000</td>
+                                    <td>Rp. <?=$total?></td>
                                 </tr>
                             </table>
                         </div>
