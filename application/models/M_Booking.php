@@ -62,6 +62,10 @@ class M_booking extends CI_Model{
     return $book;
   }
 
+  function bayar($id, $data){
+    return $this->db->insert('tb_pembayaran', $data);
+  }
+
   function get_booking($id = null, $where = array()){
     if ($id == null) {
       return null;
@@ -91,6 +95,12 @@ class M_booking extends CI_Model{
       }
       return $book;
     }
+  }
+
+  function get($select, $where = array()){
+    $this->db->select($select);
+    $this->db->where($where);
+    return $this->db->get('tb_book');
   }
 
   function get_all_booking($where = array()){

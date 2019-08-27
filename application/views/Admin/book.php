@@ -39,8 +39,8 @@
                   <th>Checkout</th>
                   <th>Malam</th>
                   <th>Pelanggan</th>
-                  <th>Status</th>
-                  <th>Total</th>
+                  <th>Total Tagihan</th>
+                  <th>Total Bayar</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -54,8 +54,8 @@
                   <td><?=$a->checkout?></td>
                   <td><?=$a->night?></td>
                   <td><?=$a->nama_pelanggan?></td>
-                  <td><?=$a->status?></td>
                   <td><?=($a->tagihan_kamar + $a->tagihan_layanan)?></td>
+                  <td><?=$a->total_bayar?></td>
                   <td>
                     <a href="<?=base_url('admin/book/detail/'.$a->id) ?>" type="button" class="btn btn-default">
                       Detail
@@ -65,7 +65,7 @@
                     <a href="<?=base_url('admin/book/checkin/'.$a->id) ?>" type="button" class="btn btn-success">
                       Checkin
                     </a>
-                    <?php } if ($a->checkout == null) { ?> 
+                    <?php } if ($a->checkout == null && $a->checkin != null) { ?> 
                     <a href="<?=base_url('admin/book/checkout/'.$a->id) ?>" type="button" class="btn btn-danger">
                       Checkout
                     </a>

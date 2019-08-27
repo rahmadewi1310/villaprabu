@@ -25,6 +25,8 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
+
+              <a href="<?=base_url('admin/book')?>" class="btn btn-default">BACK</a>
               <h3 class="box-title"></h3>
             </div>
             <!-- /.box-header -->

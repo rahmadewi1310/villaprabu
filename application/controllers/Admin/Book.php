@@ -22,7 +22,6 @@ class Book extends CI_Controller {
 	public function detail($id){
 		$data['data'] = $this->M_booking->get_booking($id);	
 		$this->load->view('admin/detailbook', $data);
-		echo json_encode($data);
 	}
 
 	public function konfirmasi($id = null){
@@ -39,9 +38,41 @@ class Book extends CI_Controller {
 		redirect('admin/book/booking_order');
 	}
 
-	
+	function checkin($id){
+		if ($id != null) 
+			$this->M_booking->update($id, ['checkin' => date('Y-m-d')]);
+
+		redirect('admin/book');
+	}
+
+	function checkout($id){
+		if ($id != null) 
+			$this->M_booking->update($id, ['checkout' => date('Y-m-d')]);
+
+		redirect('admin/book');
+	}
+
+	function bayar($id){
+		if ($id != null) {
+			$book = $this->M_booking->get_all_booking(['tb_book.id' => '= \''.$id.'\''])->row();
+			$data = $this->input->post();
+			$sisa = ($book->tagihan_kamar + $book->tagihan_layanan) - $book->total_bayar;
+			if (($sisa - $data['nominal']) > 0) {
+				$data['nominal'] = $sisa;
+			}
+
+			$this->M_booking->bayar($id, $data);
+		}
+		redirect('admin/book/detail/'.$id);
+	}
+
 	public function tambah_layanan($id_book=null){
 		$this->load->view('admin/tambah_layanan');
+	}
+
+	public function tambah_pembayaran($id_book=null){
+		$d['data'] = $this->M_booking->get_all_booking(['tb_book.id' => ' = \''.$id_book.'\''])->row_array();
+		$this->load->view('admin/tambah_pembayaran', $d);
 	}
 
 }
