@@ -92,6 +92,25 @@
                                             <td>Rp <?=number_format($total, 2, ',', '.')?></td>
                                         </tr>
                                     </table>
+                                    <!-- form bayar dp -->
+                                    </br></br></br>
+                                    <h2>Bayar Uang Muka</h2>
+                                    <?php echo form_open_multipart('booking/bayar','class="form-horizontal"'); ?>
+
+                                    <div class="form-group">
+                                        <label>Nominal bayar</label>
+                                        <input type="number" class="form-control" name="nominal" placeholder="Berapa anda membayar?" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Bukti Bayar</label></br>
+                                        <input type="file" class="dropify" name="img" required>
+                                    </div>
+                                    <div class="box-footer">
+                                        <input type="submit" name="submit" value="Simpan" class="btn btn-success">
+                                    </div>
+                                    <?php echo form_close(); ?>
+                                    <!-- form bayar dp -->
                                 </div>
                             </div>
                         </div>
